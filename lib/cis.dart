@@ -24,25 +24,55 @@ class StudentListPage extends StatelessWidget {
 
   final List<Student> students = const [
     Student(
-        name: "Worachot Thonglert",
-        id: "653450299-0",
-        image: "../assets/images/male.png",
+        name: "Akkarawit Pobwongsa",
+        id: "653450108-3",
+        image: "assets/images/Ice.jpg",
         gender: Gender.male),
     Student(
-        name: "Ramin Kaiyabut",
-        id: "653450297-4",
-        image: "../assets/images/female.png",
+        name: "Chadaporn Pinichsai",
+        id: "653450281-9",
+        image: "assets/images/Mind.jpg",
         gender: Gender.female),
     Student(
         name: "Pathipat Mattra",
         id: "653450293-2",
-        image: "../assets/images/male.png",
+        image: "assets/images/Palm.jpg",
         gender: Gender.male),
+    Student(
+        name: "Natnicha Prompik",
+        id: "653450284-3",
+        image: "assets/images/Bam.jpg",
+        gender: Gender.female),
     Student(
         name: "Worachit Thonglert",
         id: "653450298-2",
-        image: "../assets/images/female.png",
+        image: "assets/images/Dunk.jpg",
+        gender: Gender.male),
+    Student(
+        name: "Worachot Thonglert",
+        id: "653450299-0",
+        image: "assets/images/Dom.jpg",
+        gender: Gender.male),
+    Student(
+        name: "Onpreeya Jantakote",
+        id: "653450107-5",
+        image: "assets/images/Mo.jpg",
         gender: Gender.female),
+    Student(
+        name: "Chawakorn Nueangpha",
+        id: "653450087-5",
+        image: "assets/images/P.jpg",
+        gender: Gender.male),
+    Student(
+        name: "Junthima Promwang",
+        id: "653450280-1",
+        image: "assets/images/Piano.jpg",
+        gender: Gender.female),
+    Student(
+        name: "Thanachok Suwan",
+        id: "653450287-7",
+        image: "assets/images/Boss.jpg",
+        gender: Gender.male),
   ];
 
   @override
@@ -70,43 +100,100 @@ class StudentCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: student.gender == Gender.male
-              ? [Colors.blue.shade400, Colors.blue.shade100]
-              : [Colors.orange.shade400, Colors.orange.shade100],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StudentDetailPage(student: student),
+          ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: student.gender == Gender.male
+                ? [Colors.blue.shade400, Colors.blue.shade100]
+                : [Colors.orange.shade400, Colors.orange.shade100],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(12.0),
         ),
-        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              // รูปภาพในรูปแบบวงกลม
+              CircleAvatar(
+                radius: 40,
+                backgroundImage: AssetImage(student.image),
+              ),
+              const SizedBox(width: 16),
+              // ข้อมูลนักศึกษา
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      student.name,
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      student.id,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ],
+                ),
+              ),
+              // ลูกศรด้านขวา
+              const Icon(
+                Icons.arrow_forward_ios,
+                color: Colors.black54,
+              ),
+            ],
+          ),
+        ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Row(
+    );
+  }
+}
+
+class StudentDetailPage extends StatelessWidget {
+  final Student student;
+
+  const StudentDetailPage({super.key, required this.student});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(student.name),
+      ),
+      body: Center(
+        child: Column(
           children: [
-            // รูปภาพในรูปแบบวงกลม
             CircleAvatar(
-              radius: 40,
+              radius: 60,
               backgroundImage: AssetImage(student.image),
             ),
-            const SizedBox(width: 16),
-            // ข้อมูลนักศึกษา
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  student.name,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  student.id,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ],
+            const SizedBox(height: 16),
+            Text(
+              student.name,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "ID: ${student.id}",
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Gender: ${student.gender == Gender.male ? "Male" : "Female"}",
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),
