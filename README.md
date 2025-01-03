@@ -23,7 +23,7 @@ This is a simple Flutter application that displays a list of students with their
 
 | Student List Page                              | Student Detail Page                              |
 |-----------------------------------------------|-------------------------------------------------|
-| ![Student List Page](assets/screenshots/list.png) | ![Student Detail Page](assets/screenshots/detail.png) |
+| ![Student List Page](assets/images/screenshots/page.png) | ![Student Detail Page](assets/images/screenshots/detail.png) |
 
 ---
 
